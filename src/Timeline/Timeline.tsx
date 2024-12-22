@@ -1,13 +1,13 @@
-import { useState } from "react";
 import { Playhead } from "./Playhead";
 import { Ruler } from "./Ruler";
 import { TrackList } from "./TrackList";
 import { KeyframeList } from "./KeyframeList";
 import { PlayControls } from "./PlayControls";
+import useTimeStore from "../stores/useTimeStore";
 
 export const Timeline = () => {
-  // FIXME: performance concerned
-  const [time, setTime] = useState(0);
+  const { currentTime, durationTime, setCurrentTime, setDurationTime } =
+    useTimeStore();
 
   return (
     <div
@@ -15,11 +15,16 @@ export const Timeline = () => {
     bg-gray-800 border-t-2 border-solid border-gray-700"
       data-testid="timeline"
     >
-      <PlayControls time={time} setTime={setTime} />
+      <PlayControls
+        currentTime={currentTime}
+        setCurrentTime={setCurrentTime}
+        durationTime={durationTime}
+        setDurationTime={setDurationTime}
+      />
       <Ruler />
       <TrackList />
       <KeyframeList />
-      <Playhead time={time} />
+      <Playhead time={currentTime} />
     </div>
   );
 };
