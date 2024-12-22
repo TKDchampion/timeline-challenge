@@ -7,7 +7,9 @@ import useTimeStore from "../stores/useTimeStore";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export const Timeline = () => {
+  const trackCount = 10;
   const rulerRef = useRef<HTMLDivElement>(null);
+  const trackListRef = useRef<HTMLDivElement>(null);
   const keyframeListRef = useRef<HTMLDivElement>(null);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [playheadPosition, setPlayheadPosition] = useState(0);
@@ -21,7 +23,14 @@ export const Timeline = () => {
       setScrollLeft(e.currentTarget.scrollLeft);
     }
   }, []);
-
+  const handleTrackListScroll = useCallback(
+    (e: React.UIEvent<HTMLDivElement>) => {
+      if (keyframeListRef.current) {
+        keyframeListRef.current.scrollTop = e.currentTarget.scrollTop;
+      }
+    },
+    []
+  );
   const handleKeyframeListScroll = useCallback(
     (e: React.UIEvent<HTMLDivElement>) => {
       if (rulerRef.current) {
@@ -61,11 +70,15 @@ export const Timeline = () => {
         ref={rulerRef}
         onScroll={handleRulerScroll}
       />
-      <TrackList />
+      <TrackList
+        ref={trackListRef}
+        onScroll={handleTrackListScroll}
+        count={trackCount}
+      />
       <KeyframeList
         ref={keyframeListRef}
         onScroll={handleKeyframeListScroll}
-        count={10}
+        count={trackCount}
       />
       <Playhead position={playheadPosition} isHidden={isPlayheadHidden} />
     </div>
