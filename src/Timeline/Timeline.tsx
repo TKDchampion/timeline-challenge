@@ -1,10 +1,10 @@
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Playhead } from "./Playhead";
 import { Ruler } from "./Ruler";
 import { TrackList } from "./TrackList";
 import { KeyframeList } from "./KeyframeList";
 import { PlayControls } from "./PlayControls";
 import useTimeStore from "../stores/useTimeStore";
-import { useCallback, useEffect, useRef, useState } from "react";
 
 export const Timeline = () => {
   const trackCount = 10;
@@ -23,6 +23,7 @@ export const Timeline = () => {
       setScrollLeft(e.currentTarget.scrollLeft);
     }
   }, []);
+
   const handleTrackListScroll = useCallback(
     (e: React.UIEvent<HTMLDivElement>) => {
       if (keyframeListRef.current) {
@@ -31,10 +32,12 @@ export const Timeline = () => {
     },
     []
   );
+
   const handleKeyframeListScroll = useCallback(
     (e: React.UIEvent<HTMLDivElement>) => {
-      if (rulerRef.current) {
+      if (rulerRef.current && trackListRef.current) {
         rulerRef.current.scrollLeft = e.currentTarget.scrollLeft;
+        trackListRef.current.scrollTop = e.currentTarget.scrollTop;
         setScrollLeft(e.currentTarget.scrollLeft);
       }
     },
