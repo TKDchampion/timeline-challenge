@@ -1,8 +1,14 @@
+import useTimeStore from "../stores/useTimeStore";
+
 export const Segment = () => {
-  // TODO: resize based on time
+  const { durationTime } = useTimeStore();
 
   return (
-    <div className="w-[2000px] py-2" data-testid="segment">
+    <div
+      className="w-[2000px] py-2"
+      data-testid="segment"
+      style={{ width: `${durationTime}px` }}
+    >
       <div className="h-6 rounded-md bg-white/10"></div>
     </div>
   );

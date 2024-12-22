@@ -1,19 +1,25 @@
+import React, { forwardRef, UIEvent } from "react";
 import { Segment } from "./Segment";
-export const KeyframeList = () => {
-  // TODO: implement scroll sync with `Ruler` and `TrackList`
 
-  return (
-    <div className="px-4 min-w-0 overflow-auto" data-testid="keyframe-list">
-      <Segment />
-      <Segment />
-      <Segment />
-      <Segment />
-      <Segment />
-      <Segment />
-      <Segment />
-      <Segment />
-      <Segment />
-      <Segment />
-    </div>
-  );
-};
+interface KeyframeProps {
+  count: number;
+  onScroll: (e: UIEvent<HTMLDivElement>) => void;
+}
+
+export const KeyframeList = React.memo(
+  forwardRef<HTMLDivElement, KeyframeProps>(({ count, onScroll }, ref) => {
+    const renderSegments = () =>
+      Array.from({ length: count }, (_, index) => <Segment key={index} />);
+
+    return (
+      <div
+        ref={ref}
+        className="px-4 min-w-0 overflow-auto"
+        data-testid="keyframe-list"
+        onScroll={onScroll}
+      >
+        {renderSegments()}
+      </div>
+    );
+  })
+);
