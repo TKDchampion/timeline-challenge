@@ -10,6 +10,7 @@ export const Ruler = React.memo(
   forwardRef<HTMLDivElement, RulerProps>(
     ({ durationTime, onScroll, setCurrentTime }, ref) => {
       const rulerBarRef = useRef<HTMLDivElement>(null);
+      const lastTimeRef = useRef<number | null>(null);
 
       const calculateNewTime = useCallback(
         (clientX: number) => {
@@ -25,7 +26,10 @@ export const Ruler = React.memo(
       const updateTime = useCallback(
         (clientX: number) => {
           const newTime = calculateNewTime(clientX);
-          setCurrentTime(newTime);
+          if (newTime && newTime !== lastTimeRef.current) {
+            lastTimeRef.current = newTime;
+            setCurrentTime(newTime);
+          }
         },
         [calculateNewTime, setCurrentTime]
       );

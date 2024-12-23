@@ -25,7 +25,7 @@ const NumberInputField: React.FC<NumberInputFieldProps> = ({
   dataTestId,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const isTyping = useRef(false);
+  const isTyping = useRef<boolean | null>(null);
   const [value, setValue] = useState(defaultValue);
   const [focusAction, setFocusAction] = useState<FocusAction>(null);
 
@@ -44,13 +44,13 @@ const NumberInputField: React.FC<NumberInputFieldProps> = ({
     if (clampedValue !== defaultValue) {
       onChange(clampedValue);
     }
-  }, [clampValue, value, defaultValue, onChange]);
+  }, [value]);
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = Number(e.target.value) || defaultValue;
       setValue(newValue);
-      if (!isTyping.current) {
+      if (isTyping.current !== null && !isTyping.current) {
         onChange(newValue);
       }
     },

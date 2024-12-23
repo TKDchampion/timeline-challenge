@@ -13,7 +13,7 @@ describe("NumberInputField Component", () => {
     dataTestId: "number-input",
   };
 
-  beforeEach(() => {
+  afterAll(() => {
     jest.clearAllMocks();
   });
 
@@ -50,10 +50,10 @@ describe("NumberInputField Component", () => {
     render(<NumberInputField {...defaultProps} />);
     const input = screen.getByTestId("number-input");
 
-    fireEvent.change(input, { target: { value: "110" } });
+    fireEvent.keyDown(input, { key: "ArrowUp" });
     expect(onChangeMock).toHaveBeenCalledWith(110);
 
-    fireEvent.change(input, { target: { value: "90" } });
+    fireEvent.keyDown(input, { key: "ArrowDown" });
     expect(onChangeMock).toHaveBeenCalledWith(90);
   });
 
