@@ -81,15 +81,15 @@ https://github.com/user-attachments/assets/99826161-f821-4e4d-b9a8-b59c16d9894e
 - [x] Vertical scrolling is synchronized with the Track List
 - [x] Horizontal scrolling is synchronized with the Ruler
 - [x] Segment length visually represents the total Duration (`1ms = 1px`)
-- [ ] Segment length updates only after specific actions on Duration input (losing focus, pressing Enter, using arrow keys, or clicking up/down buttons)
+- [x] Segment length updates only after specific actions on Duration input (losing focus, pressing Enter, using arrow keys, or clicking up/down buttons)
 
 ### 6. Playhead Behavior
 
 https://github.com/user-attachments/assets/3940cd0d-dd9d-4331-9172-592462ad65d3
 
-- [ ] Playhead moves in sync with the Ruler and Keyframe List during horizontal scrolling
-- [ ] Playhead maintains its relative position during horizontal scrolling
-- [ ] Playhead is visible only when within the Timeline's visible area, using the `hidden` attribute when completely out of view
+- [x] Playhead moves in sync with the Ruler and Keyframe List during horizontal scrolling
+- [x] Playhead maintains its relative position during horizontal scrolling
+- [x] Playhead is visible only when within the Timeline's visible area, using the `hidden` attribute when completely out of view
 
 ## Implementation Guidelines
 
