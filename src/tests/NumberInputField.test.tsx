@@ -46,6 +46,38 @@ describe("NumberInputField Component", () => {
     expect(onChangeMock).toHaveBeenCalledWith(110);
   });
 
+  test("Entire text is selected when the input field gains focus", () => {
+    render(<NumberInputField {...defaultProps} />);
+    const input = screen.getByTestId("number-input") as HTMLInputElement;
+    const selectMock = jest.spyOn(input, "select");
+
+    fireEvent.focus(input);
+    expect(selectMock).toHaveBeenCalled();
+  });
+
+  test("Entire text is selected after using the native step buttons", () => {
+    render(<NumberInputField {...defaultProps} />);
+    const input = screen.getByTestId("number-input") as HTMLInputElement;
+    const selectMock = jest.spyOn(input, "select");
+
+    fireEvent.focus(input);
+    fireEvent.change(input, { target: { value: "110" } });
+    expect(selectMock).toHaveBeenCalled();
+  });
+
+  test("Entire text is selected after using the up arrow or down arrow keys", () => {
+    render(<NumberInputField {...defaultProps} />);
+    const input = screen.getByTestId("number-input") as HTMLInputElement;
+    const selectMock = jest.spyOn(input, "select");
+
+    fireEvent.focus(input);
+    fireEvent.keyDown(input, { key: "ArrowUp" });
+    expect(selectMock).toHaveBeenCalled();
+
+    fireEvent.keyDown(input, { key: "ArrowDown" });
+    expect(selectMock).toHaveBeenCalledTimes(3);
+  });
+
   test("Pressing up arrow or down arrow keys immediately changes the value", () => {
     render(<NumberInputField {...defaultProps} />);
     const input = screen.getByTestId("number-input");
