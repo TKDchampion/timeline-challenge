@@ -1,5 +1,9 @@
 # Phase Timeline Challenge
 
+## Presentation
+
+https://timeline-challenge.vercel.app/
+
 ## Overview
 
 Implement interactive features for a Timeline component. We will provide a basic Timeline component scaffold, and your task is to implement the functionality that meets the user behavior requirements outlined below.
