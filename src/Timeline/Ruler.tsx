@@ -1,10 +1,10 @@
 import React, { forwardRef, useCallback, useMemo, useRef } from "react";
 
-type RulerProps = {
+interface RulerProps {
   setCurrentTime: (time: number) => void;
   durationTime: number;
   onScroll: (e: React.UIEvent<HTMLDivElement>) => void;
-};
+}
 
 export const Ruler = React.memo(
   forwardRef<HTMLDivElement, RulerProps>(

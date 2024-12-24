@@ -1,9 +1,9 @@
 import React, { forwardRef } from "react";
 
-type TrackListProps = {
+interface TrackListProps {
   onScroll: (e: React.UIEvent<HTMLDivElement>) => void;
   count: number;
-};
+}
 
 export const TrackList = React.memo(
   forwardRef<HTMLDivElement, TrackListProps>(({ count, onScroll }, ref) => {
